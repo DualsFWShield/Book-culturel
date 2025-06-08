@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Livre Culturel Interactif : découvrez le Bossa Ball, la Bretagne et la critique théâtrale 'Mourir d'Amour' avec images, interactivité et design moderne.">
+    <title>Explorations Culturelles</title>
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary: #0056b3;
+            --secondary: #007bff;
+            --accent: #ffb300;
+            --bg-light: #f4f4f4;
+            --bg-dark: #2e2e2e;
+            --text-light: #fff;
+            --text-dark: #333;
+            --shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #f4f4f4 0%, #e3e9f7 100%);
+            color: var(--text-dark);
+            line-height: 1.7;
+            transition: background-color .3s, color .3s;
+        }
+        header.main-header {
+            background: linear-gradient(90deg, var(--primary) 60%, var(--secondary) 100%);
+            color: var(--text-light);
+            padding: 2.5em 0 1.5em 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        header.main-header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        #toggle-theme {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 50%;
+            padding: 12px 15px;
+            font-size: 1.2em;
+            margin-top: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: background .2s;
+        }
+        #toggle-theme:hover { background: var(--secondary); color: var(--text-light); }
+        nav.toc {
+            background: #fff;
+            padding: 14px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 80px;
+            z-index: 90;
+        }
+        nav.toc ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+        nav.toc a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: color .2s;
+        }
+        nav.toc a:hover { color: var(--accent); }
+        .book-container {
+            max-width: 1050px;
+            margin: 30px auto 30px auto;
+            background: #fff;
+            box-shadow: var(--shadow);
+            border-radius: 18px;
+            overflow: hidden;
+        }
+        .chapter {
+            padding: 48px 28px 38px 28px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .chapter:last-child { border-bottom: none; }
+        .chapter-title {
+            color: var(--primary);
+            font-size: 2.4em;
+            margin-bottom: 10px;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+            padding-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        .chapter-subtitle {
+            font-size: 1.15em;
+            color: #555;
+            margin-bottom: 28px;
+            font-style: italic;
+        }
+        .section h3 {
+            color: var(--secondary);
+            font-size: 1.5em;
+            margin-top: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section p, .section ul, .section ol {
+            margin-bottom: 18px;
+        }
+        .section ul, .section ol {
+            margin-left: 30px;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap: 18px;
+            margin: 22px 0;
+        }
+        .image-gallery img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .creator-info {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            background: #e9ecef;
+            padding: 22px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .creator-info img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--primary); }
+        .interactive-quiz {
+            background: #f9f9f9;
+            padding: 22px;
+            border-radius: 10px;
+            margin: 35px 0 0 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .interactive-quiz button {
+            padding: 10px 18px;
+            border: none;
+            background: var(--primary);
+            color: var(--text-light);
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background .2s;
+        }
+        .interactive-quiz button:hover { background: var(--secondary); }
+        .fact-box {
+            background: var(--accent);
+            color: #222;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quote-box {
+            background: #e3e9f7;
+            color: var(--primary);
+            border-left: 5px solid var(--secondary);
+            padding: 18px 22px;
+            border-radius: 8px;
+            margin: 22px 0;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+        .timeline {
+            border-left: 3px solid var(--secondary);
+            margin: 30px 0 30px 20px;
+            padding-left: 25px;
+        }
+        .timeline-event {
+            margin-bottom: 18px;
+            position: relative;
+        }
+        .timeline-event:before {
+            content: '\f111';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+            position: absolute;
+            left: -32px;
+            top: 2px;
+            font-size: 1em;
+        }
+        footer {
+            text-align: center;
+            padding: 22px;
+            background: linear-gradient(90deg, var(--primary) 60%, var(--secondary) 100%);
+            color: var(--text-light);
+            font-size: 1.1em;
+            letter-spacing: 1px;
+        }
+        #back-to-top {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            background: var(--secondary);
+            color: var(--text-light);
+            border: none;
+            padding: 12px 16px;
+            border-radius: 50%;
+            display: none;
+            cursor: pointer;
+            font-size: 1.3em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        #back-to-top:hover { background: var(--accent); color: #222; }
+        /* Dark mode */
+        .dark-mode {
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+        .dark-mode header, .dark-mode nav.toc, .dark-mode footer { background: #111; }
+        .dark-mode a { color: #4da6ff; }
+        .dark-mode .book-container { background: #23272f; }
+        .dark-mode .chapter-title { color: var(--accent); border-bottom: 3px solid var(--accent); }
+        .dark-mode .section h3 { color: var(--accent); }
+        .dark-mode .image-gallery img, .dark-mode .creator-info, .dark-mode .interactive-quiz, .dark-mode .fact-box, .dark-mode .quote-box {
+            background: #23272f;
+            color: var(--text-light);
+        }
+        .image-full-width {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .blockquote-highlight {
+            font-style: italic;
+            border-left: 4px solid var(--secondary);
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <h1><i class="fas fa-book-open"></i> Explorations Culturelles</h1>
+        <button id="toggle-theme" aria-label="Changer le thème"><i class="fas fa-moon"></i></button>
+    </header>
+    <nav class="toc">
+        <ul>
+            <li><a href="#bossa-ball"><i class="fas fa-volleyball-ball"></i> Bossa Ball</a></li>
+            <li><a href="#bretagne"><i class="fas fa-umbrella-beach"></i> La Bretagne</a></li>
+            <li><a href="#mourir-amour"><i class="fas fa-theater-masks"></i> Mourir d'Amour</a></li>
+            <li><a href="#empreinte"><i class="fas fa-fingerprint"></i> L’Empreinte</a></li>
+        </ul>
+    </nav>
+    <div class="book-container">
+        <!-- Chapitre 1 -->
+        <section id="bossa-ball" class="chapter">
+            <h2 class="chapter-title"><i class="fas fa-volleyball-ball"></i> Bossa Ball</h2>
+            <p class="chapter-subtitle">Un sport spectaculaire et innovant</p>
+            <div class="section">
+                <h3><i class="fas fa-user"></i> Origine et Créateur</h3>
+                <div class="creator-info">
+                    <img src="Images/bossabol-um-esporte-musical-03.jpg" alt="Portrait de Filip Eyckmans">
+                    <div>
+                        <p><i class="fas fa-calendar-alt"></i> Créé en <strong>2004</strong> par <strong>Filip Eyckmans</strong>, un entrepreneur belge passionné de sport et de musique. Il a voulu inventer un sport qui réunisse l’énergie du volley, la souplesse de la capoeira et la convivialité de la musique brésilienne. Son objectif : créer un jeu universel, accessible à tous, et qui favorise la fête et l’inclusion.</p>
+                        <p>Avant de lancer le Bossa Ball, Eyckmans a travaillé dans l’événementiel sportif et a observé l’impact de la musique sur la motivation des joueurs et du public. Il s’est inspiré de ses voyages au Brésil, où la joie de vivre et la créativité sont omniprésentes, pour imaginer un sport qui soit aussi un spectacle vivant.</p>
+                        <div class="fact-box"><i class="fas fa-globe"></i> Le Bossa Ball est aujourd’hui pratiqué dans plus de 30 pays !</div>
+                        <p><i class="fas fa-map-marker-alt"></i> Les premiers matchs ont eu lieu sur les plages d’Ibiza, où les acrobaties spectaculaires et les rythmes entraînants ont immédiatement conquis le public. Depuis, le Bossa Ball s’est répandu dans le monde entier, devenant un symbole de divertissement et de convivialité.</p>
+                        <p>Le sport a rapidement séduit les organisateurs de festivals et d’événements sportifs, qui y ont vu une activité ludique, inclusive et visuellement impressionnante. Aujourd’hui, des tournois sont organisés sur des plages, dans des stades et même dans des centres commerciaux, attirant un public de tous âges.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <h3><i class="fas fa-cogs"></i> Éléments Clés du Jeu</h3>
+                <ul>
+                    <li><i class="fas fa-volleyball-ball"></i> <strong>Volley-ball :</strong> Les joueurs utilisent des passes et des attaques au filet pour marquer des points, tout en respectant les règles classiques du volley. Les équipes sont composées de 3 à 5 joueurs, et la stratégie repose sur la coordination et la rapidité d’exécution.</li>
+                    <li><i class="fas fa-futbol"></i> <strong>Football :</strong> L’utilisation des pieds et de la tête est autorisée, mais limitée à deux touches consécutives, ajoutant une dimension technique au jeu. Les joueurs les plus habiles réalisent des acrobaties dignes des plus grands footballeurs de plage.</li>
+                    <li><i class="fas fa-child"></i> <strong>Trampoline :</strong> Les trampolines intégrés permettent des sauts spectaculaires, offrant des opportunités pour des smashs et des blocs impressionnants. Les joueurs peuvent atteindre jusqu’à 3 mètres de haut ! Les figures aériennes sont souvent saluées par le public.</li>
+                    <li><i class="fas fa-music"></i> <strong>Musique :</strong> Un DJ-arbitre, surnommé « arbitre samba », rythme les matchs avec des morceaux de bossa nova et d’autres genres musicaux, créant une ambiance festive et unique. La musique influence le rythme du jeu et l’ambiance générale. Parfois, des musiciens live accompagnent les matchs pour une expérience encore plus immersive.</li>
+                </ul>
+                <div class="image-gallery">
+                    <img src="Images/250px-Bossaball-wiki-2.jpg" alt="Match de Bossa Ball en action">
+                    <img src="Images/Bossaball_700x.webp" alt="Vue aérienne du terrain de Bossa Ball">
+                </div>
+                <div class="fact-box"><i class="fas fa-trophy"></i> Le Bossa Ball a été présenté lors de grands festivals sportifs et musicaux, comme les Jeux Olympiques de la Jeunesse et le Rio Carnival.</div>
+                <ul>
+                    <li><i class="fas fa-users"></i> <strong>Mixité et accessibilité :</strong> Le Bossa Ball se joue en équipes mixtes, favorisant l’inclusion et la diversité. Les règles sont simples à comprendre, ce qui permet à des débutants de s’amuser dès la première partie.</li>
+                    <li><i class="fas fa-child"></i> <strong>Sécurité :</strong> Le terrain gonflable réduit considérablement les risques de blessures, rendant ce sport accessible aux enfants comme aux adultes.</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h3><i class="fas fa-history"></i> Histoire et Évolution</h3>
+                <div class="timeline">
+                    <div class="timeline-event"><strong>2004 :</strong> Création du Bossa Ball par Filip Eyckmans.</div>
+                    <div class="timeline-event"><strong>2005-2008 :</strong> Expansion rapide en Europe et en Amérique du Sud. Les premiers clubs officiels voient le jour en Espagne, au Brésil et en Belgique.</div>
+                    <div class="timeline-event"><strong>2010 :</strong> Premiers championnats internationaux. Le Bossa Ball devient une discipline reconnue dans plusieurs fédérations sportives.</div>
+                    <div class="timeline-event"><strong>2016 :</strong> Présentation officielle lors des Jeux Olympiques de la Jeunesse. Le sport gagne en visibilité médiatique.</div>
+                    <div class="timeline-event"><strong>2020 :</strong> Le Bossa Ball est pratiqué sur tous les continents. Des variantes locales émergent, intégrant des éléments culturels propres à chaque pays.</div>
+                    <div class="timeline-event"><strong>2024 :</strong> Lancement d’une ligue mondiale avec des équipes professionnelles et des retransmissions télévisées.</div>
+                </div>
+                <div class="quote-box"><i class="fas fa-quote-left"></i> « Le Bossa Ball, c’est l’esprit du sport, de la musique et de la fête réunis sur un terrain gonflable ! »</div>
+            </div>
+            <div class="interactive-quiz">
+                <h3><i class="fas fa-question-circle"></i> Quiz Rapide</h3>
+                <p>Quel sport n'est pas directement mélangé au Bossa Ball ?</p>
+                <button onclick="alert('Réponse: Le basket-ball!')">Voir la réponse</button>
+                <p>Quel est le rôle du DJ-arbitre dans le Bossa Ball ?</p>
+                <button onclick="alert('Réponse: Il arbitre le match tout en animant l’ambiance musicale !')">Voir la réponse</button>
+            </div>
+        </section>
+        <!-- Chapitre 2 -->
+        <section id="bretagne" class="chapter">
+            <h2 class="chapter-title"><i class="fas fa-umbrella-beach"></i> La Bretagne</h2>
+            <p class="chapter-subtitle">Mythes, traditions et paysages</p>
+            <div class="section">
+                <h3><i class="fas fa-cloud-sun"></i> Climat et Réalité</h3>
+                <p>Contrairement aux idées reçues, la Bretagne bénéficie d’un climat varié et agréable. Avec en moyenne <strong>2000 heures d’ensoleillement</strong> par an, elle rivalise avec certaines régions du sud de la France. De plus, les précipitations, bien que fréquentes, sont souvent de courte durée, laissant place à des ciels dégagés et lumineux.</p>
+                <div class="fact-box"><i class="fas fa-sun"></i> Saviez-vous ? Brest reçoit moins de pluie annuelle que Nice !</div>
+                <p>Les paysages bretons, entre côtes sauvages, plages de sable fin et forêts mystérieuses, offrent une diversité qui séduit les amoureux de la nature. Le célèbre <strong>Phare du Petit Minou</strong>, par exemple, est un symbole de la beauté et de la sérénité de cette région.</p>
+                <p>La Bretagne est aussi réputée pour ses îles : Belle-Île-en-Mer, l’archipel des Glénan ou encore Ouessant, chacune possédant une identité forte et des paysages à couper le souffle. Les sentiers côtiers, comme le GR34, permettent de découvrir la région à pied, au plus près de la mer.</p>
+                <img src="Images/le-phare-du-petit-minou.jpg" alt="Phare du Petit Minou sous le soleil" class="image-gallery">
+                <div class="fact-box"><i class="fas fa-leaf"></i> La Bretagne abrite plus de 400 espèces de plantes sauvages et de nombreuses réserves naturelles.</div>
+            </div>
+            <div class="section">
+                <h3><i class="fas fa-utensils"></i> Spécialités Culinaires</h3>
+                <p>La Bretagne est également réputée pour sa gastronomie riche et variée :</p>
+                <ul>
+                    <li><i class="fas fa-bread-slice"></i> <strong>Crêpes et galettes :</strong> Préparées à base de froment ou de sarrasin, elles sont garnies d’ingrédients sucrés ou salés, selon les goûts. La galette-saucisse est une véritable star des marchés !</li>
+                    <li><i class="fas fa-birthday-cake"></i> <strong>Kouign Amann :</strong> Ce gâteau au beurre et au sucre est une véritable institution bretonne, apprécié pour sa texture croustillante et fondante.</li>
+                    <li><i class="fas fa-fish"></i> <strong>Fruits de mer :</strong> Les huîtres, moules et autres coquillages sont des incontournables des tables bretonnes. La baie de Cancale est réputée pour ses huîtres fines.</li>
+                    <li><i class="fas fa-wine-bottle"></i> <strong>Cidre et caramel au beurre salé :</strong> Ces deux produits emblématiques accompagnent parfaitement les plats et desserts locaux.</li>
+                </ul>
+                <div class="image-gallery">
+                    <img src="Images/image.webp" alt="Galette saucisse bretonne">
+                    <img src="Images/istockphoto-1620193746-612x612.jpg" alt="Kouign Amann pris en gros plan">
+                </div>
+                <div class="fact-box"><i class="fas fa-anchor"></i> La Bretagne compte plus de 2700 km de côtes, le plus long littoral de France !</div>
+                <ul>
+                    <li><i class="fas fa-ice-cream"></i> <strong>Glaces artisanales :</strong> Les glaces au caramel beurre salé ou aux fruits locaux sont très appréciées en été.</li>
+                    <li><i class="fas fa-cheese"></i> <strong>Fromages :</strong> Le fromage de chèvre de Belle-Île ou le fromage frais de la presqu’île de Rhuys sont des spécialités à découvrir.</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h3><i class="fas fa-landmark"></i> Culture et Légendes</h3>
+                <ul>
+                    <li><i class="fas fa-dragon"></i> <strong>La forêt de Brocéliande :</strong> Lieu mythique associé à la légende du roi Arthur et de Merlin l’Enchanteur. On y trouve le tombeau de Merlin, la fontaine de Barenton et de nombreux sites mystérieux.</li>
+                    <li><i class="fas fa-music"></i> <strong>Fest-noz :</strong> Fêtes traditionnelles bretonnes où l’on danse au son des binious et bombardes. Ces fêtes sont inscrites au patrimoine culturel immatériel de l’UNESCO.</li>
+                    <li><i class="fas fa-ship"></i> <strong>Les corsaires de Saint-Malo :</strong> Marins célèbres pour leurs exploits et leur esprit d’aventure. La ville de Saint-Malo est entourée de remparts impressionnants et possède une histoire fascinante.</li>
+                    <li><i class="fas fa-crow"></i> <strong>La légende d’Ys :</strong> Ville engloutie par l’océan, symbole de la puissance et de la fragilité de la nature.</li>
+                    <li><i class="fas fa-tree"></i> <strong>Le menhir de Carnac :</strong> L’un des plus grands sites mégalithiques du monde, avec plus de 3000 pierres dressées.</li>
+                </ul>
+                <div class="quote-box"><i class="fas fa-quote-left"></i> « En Bretagne, il fait beau plusieurs fois par jour ! »</div>
+            </div>
+        </section>
+        <!-- Chapitre 3 -->
+        <section id="mourir-amour" class="chapter">
+            <h2 class="chapter-title"><i class="fas fa-theater-masks"></i> Critique : "Mourir d'Amour"</h2>
+            <p class="chapter-subtitle">Théâtre Le Vilar - 2025</p>
+            <div class="section">
+                <h3><i class="fas fa-gem"></i> Trois Points Forts</h3>
+                <ol>
+                    <li><i class="fas fa-user-friends"></i> <strong>Jeu d'acteurs polyvalent :</strong> Les acteurs passent avec fluidité d’un rôle à l’autre, démontrant une maîtrise impressionnante de leur art. Chaque personnage est incarné avec justesse, rendant la pièce vivante et surprenante. Les changements de costumes et de voix sont réalisés en quelques secondes, ce qui impressionne le public.</li>
+                    <li><i class="fas fa-random"></i> <strong>Structure non linéaire :</strong> La pièce joue avec le temps, alternant entre passé, présent et futur, pour offrir une perspective riche et nuancée. Cette construction narrative capte l’attention du spectateur du début à la fin. Les flashbacks et anticipations sont habilement intégrés, rendant l’intrigue captivante.</li>
+                    <li><i class="fas fa-heartbeat"></i> <strong>Thèmes contemporains :</strong> L’amour, la société et les questions politiques sont abordés avec une profondeur et une sensibilité qui résonnent avec le public. Les dialogues sont percutants et invitent à la réflexion. La pièce aborde aussi la solitude, la quête de sens et la difficulté de communiquer dans un monde moderne.</li>
+                </ol>
+                <img src="Images/10-PEUT_ON_ENCORE_MOURIR_10_HR_©CiciOlsson-copy-scaled.jpg" alt="Scène de la pièce Mourir d'Amour" class="image-full-width">
+            </div>
+            <div class="section">
+                <h3><i class="fas fa-search"></i> Analyse approfondie</h3>
+                <p>La pièce interroge la notion d’amour à travers différents prismes : passion, sacrifice, désillusion, mais aussi espoir. Les décors minimalistes mettent en valeur le jeu des comédiens et la lumière, subtilement travaillée, accompagne les transitions temporelles. La bande-son, discrète mais efficace, souligne les moments clés et amplifie l’émotion.</p>
+                <p>Le texte, écrit dans un style à la fois poétique et réaliste, permet au spectateur de s’identifier aux personnages. Les thèmes de la famille, de la perte et de la reconstruction sont omniprésents. La pièce propose aussi une réflexion sur la place de l’art dans la société et sur la capacité du théâtre à provoquer le changement.</p>
+                <div class="fact-box"><i class="fas fa-award"></i> "Mourir d’Amour" a reçu le prix du public au Festival de Théâtre Contemporain 2025.</div>
+                <div class="fact-box"><i class="fas fa-users"></i> Plus de 10 000 spectateurs ont assisté à la pièce lors de sa première tournée !</div>
+            </div>
+            <div class="section">
+                <h3><i class="fas fa-comment-dots"></i> Avis final</h3>
+                <blockquote class="blockquote-highlight">
+                    <i class="fas fa-quote-left"></i> "Une pièce riche, intelligente et émouvante, à voir absolument. Elle bouleverse, fait réfléchir et laisse une empreinte durable dans l’esprit du spectateur."
+                </blockquote>
+            </div>
+        </section>
+        <!-- Chapitre 4 -->
+        <section id="empreinte" class="chapter">
+            <h2 class="chapter-title"><i class="fas fa-fingerprint"></i> Critique : "L’Empreinte"</h2>
+            <p class="chapter-subtitle">Jean-Michel d’Hoop et Carole Karemera</p>
+            <div class="section">
+                <h3><i class="fas fa-book"></i> Synopsis</h3>
+                <p>"L’Empreinte" est une pièce de théâtre qui plonge profondément dans les thèmes de l’identité, de la mémoire collective et des relations intergénérationnelles. À travers une narration poétique et une mise en scène immersive, la pièce explore les traces laissées par les événements historiques sur les individus et les communautés. Jean-Michel d’Hoop et Carole Karemera, en collaboration, tissent une histoire qui mêle des récits personnels à des réflexions universelles sur l’héritage culturel et émotionnel.</p>
+                <p>La pièce suit plusieurs personnages, chacun confronté à des dilemmes liés à leur passé et à leur avenir. Les dialogues, souvent entrecoupés de monologues introspectifs, permettent de plonger dans les pensées les plus profondes des protagonistes. La musique et les éléments visuels jouent un rôle clé, renforçant l’atmosphère et les émotions véhiculées par les acteurs.</p>
+                <p>Le texte s’appuie sur des témoignages réels, ce qui confère à l’œuvre une authenticité rare. Les spectateurs sont invités à réfléchir sur la transmission des valeurs, la construction de l’identité et la place de la mémoire dans la société contemporaine. La pièce aborde aussi la question de l’exil, du déracinement et de la reconstruction de soi.</p>
+                <div class="fact-box"><i class="fas fa-lightbulb"></i> La pièce s’inspire de témoignages réels recueillis auprès de familles issues de la diaspora africaine.</div>
+                <div class="fact-box"><i class="fas fa-globe"></i> "L’Empreinte" a été jouée dans plus de 15 pays et traduite en 7 langues.</div>
+            </div>
+            <div class="section">
+                <h3><i class="fas fa-star"></i> Points Forts</h3>
+                <ul>
+                    <li><i class="fas fa-paint-brush"></i> <strong>Collaboration artistique exceptionnelle :</strong> Jean-Michel d’Hoop, connu pour son approche innovante du théâtre, et Carole Karemera, artiste multidisciplinaire, unissent leurs forces pour créer une œuvre qui transcende les frontières culturelles et artistiques. Leur complémentarité se reflète dans chaque aspect de la pièce, de l’écriture à la mise en scène.</li>
+                    <li><i class="fas fa-heart"></i> <strong>Émotion et profondeur :</strong> La pièce aborde des thèmes universels tels que la perte, l’espoir et la résilience, tout en restant ancrée dans des expériences personnelles. Les spectateurs sont invités à réfléchir sur leur propre héritage et les empreintes qu’ils laisseront derrière eux.</li>
+                    <li><i class="fas fa-lightbulb"></i> <strong>Scénographie innovante :</strong> L’utilisation de l’espace scénique est magistrale, avec des décors modulables qui évoluent au fil de l’histoire. Les jeux de lumière et les projections vidéo ajoutent une dimension supplémentaire, transformant la scène en un véritable tableau vivant.</li>
+                    <li><i class="fas fa-users"></i> <strong>Performance des acteurs :</strong> Les acteurs livrent des performances captivantes, incarnant leurs personnages avec une intensité et une authenticité remarquables. Leur capacité à transmettre des émotions complexes est l’un des points culminants de la pièce.</li>
+                    <li><i class="fas fa-masks-theater"></i> <strong>Polyphonie des voix :</strong> Plusieurs langues et registres sont utilisés, reflétant la diversité des parcours et des identités.</li>
+                    <li><i class="fas fa-hands-helping"></i> <strong>Interaction avec le public :</strong> Certaines représentations incluent des échanges avec les spectateurs, favorisant la réflexion collective.</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h3><i class="fas fa-brain"></i> Analyse Thématique</h3>
+                <p>"L’Empreinte" aborde plusieurs thèmes majeurs, notamment :</p>
+                <ul>
+                    <li><i class="fas fa-people-arrows"></i> <strong>La mémoire collective :</strong> La pièce explore comment les souvenirs partagés façonnent l’identité d’une communauté et comment ils peuvent être à la fois une source de force et de douleur. Les récits familiaux, transmis de génération en génération, sont au cœur de l’intrigue.</li>
+                    <li><i class="fas fa-feather-alt"></i> <strong>L’héritage culturel :</strong> À travers des références à des traditions et des récits historiques, la pièce met en lumière l’importance de préserver et de transmettre son patrimoine culturel. Les objets symboliques, les chants et les rituels sont intégrés à la mise en scène.</li>
+                    <li><i class="fas fa-seedling"></i> <strong>La résilience humaine :</strong> Les personnages illustrent la capacité de l’être humain à surmonter les épreuves et à trouver un sens à travers les défis de la vie. La pièce montre aussi la force des liens familiaux et amicaux.</li>
+                    <li><i class="fas fa-globe-africa"></i> <strong>L’exil et l’identité :</strong> Le parcours des personnages met en lumière la difficulté de trouver sa place entre deux cultures, et la richesse de l’hybridité.</li>
+                </ul>
+                <div class="quote-box"><i class="fas fa-quote-left"></i> « L’Empreinte nous rappelle que chaque histoire individuelle contribue à la grande fresque de l’humanité. »</div>
+            </div>
+            <div class="section">
+                <h3><i class="fas fa-comment-dots"></i> Avis final</h3>
+                <blockquote class="blockquote-highlight">
+                    <i class="fas fa-quote-left"></i> "Une œuvre captivante et profondément émouvante, "L’Empreinte" est une pièce qui ne se contente pas de raconter une histoire, mais qui invite les spectateurs à réfléchir sur leur propre place dans le monde et sur les traces qu’ils laisseront derrière eux. Une expérience théâtrale inoubliable qui mérite d’être vue et revisitée."
+                </blockquote>
+                <div class="fact-box"><i class="fas fa-star"></i> La pièce a été saluée par la critique pour sa puissance émotionnelle et son originalité.</div>
+            </div>
+        </section>
+    </div>
+    <button id="back-to-top" title="Retour en haut"><i class="fas fa-chevron-up"></i></button>
+    <footer>
+        <p><i class="fas fa-copyright"></i> 2025 Explorations Culturelles. Tous droits réservés.</p>
+    </footer>
+    <script>
+        // Thème clair/sombre
+        const toggleBtn = document.getElementById('toggle-theme');
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+        // Bouton retour en haut
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
