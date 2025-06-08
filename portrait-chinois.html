@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portrait Chinois</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary: #0056b3;
+            --secondary: #007bff;
+            --accent: #ffb300;
+            --bg-light: #f4f4f4;
+            --bg-dark: #2e2e2e;
+            --text-light: #fff;
+            --text-dark: #333;
+            --shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #f4f4f4 0%, #e3e9f7 100%);
+            color: var(--text-dark);
+            line-height: 1.7;
+            transition: background-color .3s, color .3s;
+        }
+        header.main-header {
+            background: linear-gradient(90deg, var(--primary) 60%, var(--secondary) 100%);
+            color: var(--text-light);
+            padding: 2.5em 0 1.5em 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        header.main-header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        #toggle-theme {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 50%;
+            padding: 12px 15px;
+            font-size: 1.2em;
+            margin-top: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: background .2s;
+        }
+        #toggle-theme:hover { background: var(--secondary); color: var(--text-light); }
+        nav.toc {
+            background: #fff;
+            padding: 14px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 80px;
+            z-index: 90;
+        }
+        nav.toc ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+        nav.toc a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: color .2s;
+        }
+        nav.toc a:hover { color: var(--accent); }
+        .container {
+            max-width: 1050px;
+            margin: 30px auto;
+            background: #fff;
+            box-shadow: var(--shadow);
+            border-radius: 18px;
+            overflow: hidden;
+        }
+        .portrait-list {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            padding: 36px 22px;
+        }
+        .portrait-item {
+            background: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 22px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+        }
+        .portrait-icon {
+            font-size: 2.1em;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+        .portrait-content {
+            flex: 1;
+        }
+        .portrait-title {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.15em;
+            margin-bottom: 6px;
+        }
+        .portrait-desc {
+            color: #444;
+            font-size: 1.05em;
+        }
+        body.dark-mode {
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+        body.dark-mode .container {
+            background: #23272f;
+            color: var(--text-light);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+        }
+        body.dark-mode .portrait-item {
+            background: #2e2e2e;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        }
+        body.dark-mode .portrait-title {
+            color: var(--accent);
+        }
+        body.dark-mode .portrait-desc {
+            color: #e0e0e0;
+        }
+        body.dark-mode nav.toc {
+            background: #23272f;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+        }
+        body.dark-mode nav.toc a {
+            color: var(--accent);
+        }
+        body.dark-mode nav.toc a:hover {
+            color: var(--text-light);
+        }
+        @media (max-width: 900px) {
+            .container {
+                max-width: 98vw;
+                margin: 18px 1vw;
+                border-radius: 10px;
+            }
+            .portrait-item {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px;
+            }
+            .portrait-icon {
+                font-size: 1.8em;
+            }
+        }
+        @media (max-width: 600px) {
+            header.main-header h1 {
+                font-size: 1.5em;
+                gap: 7px;
+            }
+            nav.toc ul {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            .portrait-item {
+                padding: 12px;
+            }
+            .portrait-icon {
+                font-size: 1.5em;
+            }
+        }
+        h1.portrait-main-title {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <h1><i class="fas fa-book-open"></i>Book Culturel</h1>
+        <button id="toggle-theme" aria-label="Changer le thème"><i class="fas fa-moon"></i></button>
+    </header>
+    <nav class="toc">
+        <ul>
+            <li><a href="index.html#bossa-ball"><i class="fas fa-volleyball-ball"></i> Bossa Ball</a></li>
+            <li><a href="index.html#bretagne"><i class="fas fa-umbrella-beach"></i> La Bretagne</a></li>
+            <li><a href="index.html#mourir-amour"><i class="fas fa-theater-masks"></i> Mourir d'Amour</a></li>
+            <li><a href="index.html#empreinte"><i class="fas fa-fingerprint"></i> L’Empreinte</a></li>
+            <li><a href="index.html#hamlet"><i class="fas fa-mask"></i> Hamlet</a></li>
+            <li><a href="portrait-chinois.html"><i class="fas fa-user-ninja"></i> Portrait chinois</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1 class="portrait-main-title"><i class="fas fa-user-astronaut"></i> Mon Portrait Chinois</h1>
+        <div class="portrait-list">
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fas fa-mug-hot"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais une boisson, je serais <b>le café</b></div>
+                    <div class="portrait-desc">Amer et noir, mon humour reflète une certaine ironie et une manière réaliste de voir les choses, mais toujours avec une touche de sarcasme.</div>
+                </div>
+            </div>
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fas fa-tools"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais un outil, je serais <b>le couteau suisse</b></div>
+                    <div class="portrait-desc">Multidisciplinaire, j'ai toujours une compétence qui peut servir, souvent même inattendue !</div>
+                </div>
+            </div>
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fas fa-bolt"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais une réaction chimique, je serais <b>le césium et l'eau</b></div>
+                    <div class="portrait-desc">J'aime tout ce qui est spectaculaire et imprévisible, et j'apprécie les moments où les choses explosent, au sens figuré comme au sens propre.</div>
+                </div>
+            </div>
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fas fa-robot"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais un personnage de film, je serais <b>Iron-Man</b></div>
+                    <div class="portrait-desc">Innovant et audacieux, je m'efforce toujours de repousser les limites et d'explorer des solutions en dehors des sentiers battus.</div>
+                </div>
+            </div>
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fas fa-city"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais un style architectural, je serais <b>néo-futuriste</b></div>
+                    <div class="portrait-desc">J'apprécie l'architecture moderne et audacieuse, qui fait une forte impression et se projette dans l'avenir.</div>
+                </div>
+            </div>
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fas fa-cubes"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais un jeu vidéo, je serais <b>Minecraft</b></div>
+                    <div class="portrait-desc">Je vois le monde comme un terrain de jeu infini, où les possibilités sont illimitées et où je peux exprimer ma créativité sans contrainte.</div>
+                </div>
+            </div>
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fas fa-code-branch"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais un concept, je serais <b>l'open source</b></div>
+                    <div class="portrait-desc">Je valorise la collaboration et le partage de mes projets personnels, et je crois que les meilleures idées sont celles qui sont accessibles et modifiables par tous.</div>
+                </div>
+            </div>
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fas fa-question"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais un sentiment, je serais <b>la perplexité</b></div>
+                    <div class="portrait-desc">Mes idées ont tendance à susciter la réflexion sur mes capacités mentales chez les autres, tout comme je reste souvent perplexe devant leurs idées et comportements.</div>
+                </div>
+            </div>
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fas fa-user-secret"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais une invention absurde, je serais <b>le Privacy Scarf</b></div>
+                    <div class="portrait-desc">J'aime préserver ma tranquillité, parfois même à l'excès, tout en gardant une touche d'humour.</div>
+                </div>
+            </div>
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fab fa-python"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais un langage de programmation, je serais <b>le Python</b></div>
+                    <div class="portrait-desc">Avec ma capacité à résoudre divers problèmes de manière rapide et efficace, je préfère garder les choses accessibles tout en restant polyvalent.</div>
+                </div>
+            </div>
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fas fa-brain"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais une question existentielle, je serais <b>"Pourquoi ralentit-on après s'être fait flasher par un radar ?"</b></div>
+                    <div class="portrait-desc">Je trouve souvent difficile de comprendre certains comportements des autres, ce qui me pousse à réfléchir sur leurs actions et souvent rigoler sans raison apparente.</div>
+                </div>
+            </div>
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fas fa-atom"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais un élément du tableau périodique, je serais <b>le sodium</b></div>
+                    <div class="portrait-desc">Je peux sembler inoffensif au premier abord, mais je suis capable de surprendre et d'apporter de l'énergie lorsque les circonstances le demandent.</div>
+                </div>
+            </div>
+            <div class="portrait-item">
+                <span class="portrait-icon"><i class="fas fa-dna"></i></span>
+                <div class="portrait-content">
+                    <div class="portrait-title">Si j'étais un monument historique, je serais <b>Le Tigre et La Tortue à Duisburg, Allemagne</b></div>
+                    <div class="portrait-desc">Comme ce monument, je combine la vitesse du tigre et la lenteur de la tortue ; je constate souvent que mes pensées évoluent plus vite que les autres ne peuvent les comprendre.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Thème sombre/clair identique à index.html
+        const btn = document.getElementById('toggle-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const userPref = localStorage.getItem('theme');
+        if ((userPref === 'dark') || (!userPref && prefersDark)) {
+            document.body.classList.add('dark-mode');
+        }
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+    </script>
+</body>
+</html>
