@@ -261,6 +261,128 @@
             border-left: 4px solid var(--secondary);
             padding-left: 10px;
         }
+        /* Graphiques SVG & infographies */
+        .svg-circular-chart {
+            flex-shrink: 0;
+        }
+        .svg-circular-chart-bg {
+            fill: #f4f4f4;
+        }
+        .svg-circular-chart-volley {
+            stroke: #ffb300;
+        }
+        .svg-circular-chart-foot {
+            stroke: #007bff;
+        }
+        .svg-circular-chart-trampo {
+            stroke: #0056b3;
+        }
+        .svg-circular-chart-music {
+            stroke: #2e2e2e;
+        }
+        .svg-circular-chart-text {
+            fill: #333;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .svg-bar-chart, .svg-infographic, .svg-scenography, .svg-gauge {
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            margin-bottom: 18px;
+        }
+        .svg-infographic {
+            background: #e9ecef;
+        }
+        .svg-scenography {
+            background: #e3e9f7;
+        }
+        .svg-gauge {
+            background: #f9f9f9;
+        }
+        .svg-bar-chart rect, .svg-infographic rect {
+            shape-rendering: crispEdges;
+        }
+        .svg-scenography-ellipse {
+            fill: #b3e0ff;
+        }
+        .svg-scenography-rect {
+            fill: #0056b3;
+            stroke: #23272f;
+            stroke-width: 2;
+        }
+        .svg-scenography-text-main {
+            fill: #fff;
+        }
+        .svg-scenography-text-hamlet {
+            fill: #23272f;
+        }
+        .svg-scenography-text-mer {
+            fill: #0056b3;
+        }
+        .svg-gauge-bar-act1 { fill: #b3e0ff; }
+        .svg-gauge-bar-act2 { fill: #007bff; }
+        .svg-gauge-bar-act3 { fill: #0056b3; }
+        .svg-gauge-bar-act4 { fill: #ffb300; }
+        .svg-gauge-bar-act5 { fill: #d32f2f; }
+        .svg-gauge-label { fill: #333; font-size: 10px; }
+        .svg-bar-label { fill: #333; font-size: 10px; }
+        .svg-infographic-label { fill: #333; font-size: 9px; }
+        /* Graphiques SVG & infographies (compléments) */
+        .svg-flex-row {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .svg-list-unstyled {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .svg-legend-color {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            margin-right: 7px;
+        }
+        .svg-legend-volley { background: #ffb300; }
+        .svg-legend-foot { background: #007bff; }
+        .svg-legend-trampo { background: #0056b3; }
+        .svg-legend-music { background: #2e2e2e; }
+        .svg-mb-18 { margin-bottom: 18px; }
+        .svg-mb-12 { margin-bottom: 12px; }
+        .svg-gauge-box {
+            border-radius: 8px;
+            padding: 12px 18px;
+            max-width: 350px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            background: #f9f9f9;
+        }
+        .svg-gauge-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        /* Chart.js styles */
+        .chart-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 28px auto;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 18px 12px 8px 12px;
+        }
+        .chart-title {
+            text-align: center;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .chart-container.chart-h350 { height: 350px; }
+        .chart-container.chart-h260 { height: 260px; }
+        .chart-container.chart-h220 { height: 220px; }
+        .chart-container.chart-h160 { height: 160px; }
     </style>
 </head>
 <body>
@@ -332,6 +454,38 @@
                 <p>Quel est le rôle du DJ-arbitre dans le Bossa Ball ?</p>
                 <button onclick="alert('Réponse: Il arbitre le match tout en animant l’ambiance musicale !')">Voir la réponse</button>
             </div>
+            <!-- Nouveau graphique Chart.js : Répartition des influences sportives -->
+            <div class="chart-container chart-h350">
+                <div class="chart-title"><i class="fas fa-chart-pie"></i> Répartition des influences sportives</div>
+                <canvas id="bossaPieChart" aria-label="Répartition influences Bossa Ball"></canvas>
+            </div>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (window.Chart) {
+                    new Chart(document.getElementById('bossaPieChart').getContext('2d'), {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Volley-ball', 'Football', 'Trampoline', 'Musique'],
+                            datasets: [{
+                                data: [40, 30, 20, 10],
+                                backgroundColor: ['#ffb300', '#007bff', '#0056b3', '#2e2e2e'],
+                                borderWidth: 2,
+                                borderColor: '#fff',
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: { position: 'bottom', labels: { font: { family: 'Montserrat', size: 14 } } },
+                                title: { display: false }
+                            },
+                            cutout: '65%',
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+                }
+            });
+            </script>
         </section>
         <!-- Chapitre 2 -->
         <section id="bretagne" class="chapter">
@@ -403,6 +557,50 @@
                     <i class="fas fa-quote-left"></i> "Une pièce riche, intelligente et émouvante, à voir absolument. Elle bouleverse, fait réfléchir et laisse une empreinte durable dans l’esprit du spectateur."
                 </blockquote>
             </div>
+            <!-- Nouveau graphique Chart.js : Thèmes abordés dans Mourir d'Amour -->
+            <div class="chart-container chart-h260">
+                <div class="chart-title"><i class="fas fa-chart-bar"></i> Thèmes abordés dans "Mourir d'Amour"</div>
+                <canvas id="mourirBarChart" aria-label="Thèmes Mourir d'Amour"></canvas>
+            </div>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (window.Chart) {
+                    new Chart(document.getElementById('mourirBarChart').getContext('2d'), {
+                        type: 'bar',
+                        data: {
+                            labels: ['Amour', 'Famille', 'Société', 'Solitude', 'Espoir'],
+                            datasets: [{
+                                label: 'Importance',
+                                data: [8, 7, 10, 5, 6],
+                                backgroundColor: [
+                                    '#ffb300', '#007bff', '#0056b3', '#2e2e2e', '#b3e0ff'
+                                ],
+                                borderRadius: 8,
+                                maxBarThickness: 38
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: { display: false },
+                                title: { display: false }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 12,
+                                    ticks: { stepSize: 2, font: { family: 'Montserrat', size: 13 } }
+                                },
+                                x: {
+                                    ticks: { font: { family: 'Montserrat', size: 13 } }
+                                }
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+                }
+            });
+            </script>
         </section>
         <!-- Chapitre 4 -->
         <section id="empreinte" class="chapter">
@@ -443,7 +641,50 @@
                 <blockquote class="blockquote-highlight">
                     <i class="fas fa-quote-left"></i> "Une œuvre captivante et profondément émouvante, "L’Empreinte" est une pièce qui ne se contente pas de raconter une histoire, mais qui invite les spectateurs à réfléchir sur leur propre place dans le monde et sur les traces qu’ils laisseront derrière eux. Une expérience théâtrale inoubliable qui mérite d’être vue et revisitée."
                 </blockquote>
-                <div class="fact-box"><i class="fas fa-star"></i> La pièce a été saluée par la critique pour sa puissance émotionnelle et son originalité.</div>
+                <!-- Nouveau graphique Chart.js : Diffusion internationale de L’Empreinte -->
+                <div class="chart-container chart-h220">
+                    <div class="chart-title"><i class="fas fa-globe-europe"></i> Diffusion internationale de "L’Empreinte"</div>
+                    <canvas id="empreinteBarChart" aria-label="Diffusion internationale L’Empreinte"></canvas>
+                </div>
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (window.Chart) {
+                        new Chart(document.getElementById('empreinteBarChart').getContext('2d'), {
+                            type: 'bar',
+                            data: {
+                                labels: ['France', 'Belgique', 'Rwanda', 'Canada', 'Suisse', 'Italie', 'Allemagne'],
+                                datasets: [{
+                                    label: 'Représentations',
+                                    data: [15, 10, 8, 7, 6, 5, 4],
+                                    backgroundColor: [
+                                        '#ffb300', '#007bff', '#0056b3', '#2e2e2e', '#b3e0ff', '#23272f', '#4da6ff'
+                                    ],
+                                    borderRadius: 8,
+                                    maxBarThickness: 32
+                                }]
+                            },
+                            options: {
+                                plugins: {
+                                    legend: { display: false },
+                                    title: { display: false }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        max: 18,
+                                        ticks: { stepSize: 2, font: { family: 'Montserrat', size: 13 } }
+                                    },
+                                    x: {
+                                        ticks: { font: { family: 'Montserrat', size: 13 } }
+                                    }
+                                },
+                                responsive: true,
+                                maintainAspectRatio: false
+                            }
+                        });
+                    }
+                });
+                </script>
             </div>
         </section>
         <!-- Chapitre 5 -->
@@ -493,12 +734,59 @@
                     <i class="fas fa-quote-left"></i> « Hamlet, dans cette version, est une plongée vertigineuse dans l’âme humaine, un miroir tendu à notre époque, où le théâtre devient l’ultime refuge face au chaos du monde. »
                 </blockquote>
             </div>
+            <!-- Nouveau graphique Chart.js : Intensité dramatique Hamlet -->
+            <div class="chart-container chart-h160">
+                <div class="chart-title"><i class="fas fa-burn"></i> Intensité dramatique (Hamlet)</div>
+                <canvas id="hamletGaugeChart" aria-label="Intensité dramatique Hamlet"></canvas>
+            </div>
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (window.Chart) {
+                    new Chart(document.getElementById('hamletGaugeChart').getContext('2d'), {
+                        type: 'line',
+                        data: {
+                            labels: ['Acte I', 'II', 'III', 'IV', 'V'],
+                            datasets: [{
+                                label: 'Tension dramatique',
+                                data: [3, 5, 7, 8, 10],
+                                fill: true,
+                                borderColor: '#d32f2f',
+                                backgroundColor: 'rgba(211,47,47,0.12)',
+                                pointBackgroundColor: '#d32f2f',
+                                pointRadius: 6,
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: { display: false },
+                                title: { display: false }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 12,
+                                    ticks: { stepSize: 2, font: { family: 'Montserrat', size: 13 } }
+                                },
+                                x: {
+                                    ticks: { font: { family: 'Montserrat', size: 13 } }
+                                }
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+                }
+            });
+            </script>
         </section>
     </div>
     <button id="back-to-top" title="Retour en haut"><i class="fas fa-chevron-up"></i></button>
     <footer>
         <p><i class="fas fa-copyright"></i> 2025 Explorations Culturelles. Tous droits réservés.</p>
     </footer>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Thème clair/sombre
         const toggleBtn = document.getElementById('toggle-theme');
